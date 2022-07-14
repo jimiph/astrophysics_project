@@ -6,11 +6,21 @@ import matplotlib.pyplot as plt
 import scipy.stats as sp
 
 class varialble_star:
-
+    """
+    Objects made by this class can be used to plotting some useful plots.
+    """
     def __init__(self, path_for_reading_crude_data = "D:/University Cources/BS/6/astrophysics/astrophysics project/crude data/long_period_variable/",
      path_for_saving_resulting_files = "D:/University Cources/BS/6/astrophysics/astrophysics project/crude data/",
      path_for_saving_figs = "D:/University Cources/BS/6/astrophysics/astrophysics project/figures",
      concat_file_name = "concat_dataset", final_dataset_name = "final_dataset"):
+
+        """
+        Addresses in __init__ function are personalized, so if you want to use this code 
+        on your own laptop you have to change is relevantly.
+        cutt_off is used to not consider very errored datas in followin analysis.
+        Other attributes are obvious.
+        """
+
         self.path_for_reading_crude_data = path_for_reading_crude_data
         self.path_for_saving_resulting_files = path_for_saving_resulting_files
         self.concat_file_name = concat_file_name
@@ -21,7 +31,11 @@ class varialble_star:
         self.make_final_dataset()
         
     def make_final_dataset(self):
-
+        """
+        This functino uses crude .csv files, then concatenate them.
+        After this step the functions clenas data and make the final
+        dataset and save it as a .csv file.
+        """
         all_files = glob.glob(self.path_for_reading_crude_data + "/*.csv")
         li = []
         for file_name in all_files:
@@ -42,7 +56,9 @@ class varialble_star:
         self.is_necessary_files_made = True
 
     def make_diagram_Mv_per_logP(self):
-
+        """
+        This functino plots M_v (visible absolute magnitude) per logarithm of period.
+        """
         if self.is_necessary_files_made:
 
             full_path = self.path_for_saving_resulting_files + self.final_dataset_name + ".csv"
@@ -75,7 +91,9 @@ class varialble_star:
             plt.show()
 
     def make_diagram_period_disturb(self):
-
+        """
+        This function plots a histogram to display the distribution of periods.
+        """
         if self.is_necessary_files_made:
 
             full_path = self.path_for_saving_resulting_files + self.final_dataset_name + ".csv"
@@ -101,7 +119,10 @@ class varialble_star:
 
 
     def make_diagram_RSG_disturb(self):
-
+        """
+        This function sketches a bar plot to show the statistics of red supergiants
+        and non red supergiants.
+        """
         if self.is_necessary_files_made:
 
             full_path = self.path_for_saving_resulting_files + self.final_dataset_name + ".csv"
@@ -125,5 +146,5 @@ class varialble_star:
 
 star = varialble_star()
 star.make_diagram_Mv_per_logP()
-# star.make_diagram_RSG_disturb()
-# star.make_diagram_period_disturb()
+star.make_diagram_RSG_disturb()
+star.make_diagram_period_disturb()
